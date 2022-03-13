@@ -16,6 +16,7 @@
     "scripts": {
         "client": "yarn workspace @tosios/client",
         "common": "yarn workspace @tosios/common",
+        "dungeon": "yarn workspace @tosios/dungeon",
         "server": "yarn workspace @tosios/server",
         "clean": "sh ./scripts/clean.sh",
         "dev": "sh ./scripts/dev.sh",
@@ -35,6 +36,7 @@
         "@types/react": "^16.9.17",
         "@types/react-dom": "^16.9.4",
         "@types/react-helmet": "^5.0.14",
+        "@types/seedrandom": "^3.0.2",
         "concurrently": "^7.0.0",
         "esbuild": "^0.14.25",
         "esbuild-plugin-svgr": "^1.0.0",
