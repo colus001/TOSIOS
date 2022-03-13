@@ -16,9 +16,9 @@ import { createTilemap, duplicateTilemap, random, randomChoice } from './utils';
 export interface DungeonArgs {
     /** A list of rooms to be used in the dungeon */
     rooms: RoomTemplate[];
-    /** Width of the map */
+    /** Width of the map in tiles */
     mapWidth: number;
-    /** Height of the map */
+    /** Height of the map in tiles */
     mapHeight: number;
     /** Gutter of the top-most container (used for sub-containers) */
     mapGutterWidth: number;
