@@ -1,8 +1,12 @@
 import { ArraySchema, MapSchema, Schema, type } from '@colyseus/schema';
-import { Bullet, Game, Monster, Player, Prop } from '../entities';
 import { Collisions, Constants, Entities, Geometry, Maps, Maths, Models, Tiled, Types } from '@tosios/common';
+import { DefaultRooms, generate } from '@tosios/dungeon';
+import { Bullet, Game, Monster, Player, Prop } from '../entities';
 
 export class GameState extends Schema {
+    //
+    // Synced
+    //
     @type(Game)
     public game: Game;
 
@@ -18,6 +22,9 @@ export class GameState extends Schema {
     @type([Bullet])
     public bullets: ArraySchema<Bullet> = new ArraySchema<Bullet>();
 
+    //
+    // Local
+    //
     private map: Entities.Map;
 
     private walls: Collisions.TreeCollider;
@@ -54,6 +61,7 @@ export class GameState extends Schema {
 
         // Map
         this.initializeMap(mapName);
+        this.generateMap();
 
         // Callback
         this.onMessage = onMessage;
@@ -185,6 +193,22 @@ export class GameState extends Schema {
             if (tile.tileId > 0) {
                 this.spawners.push(new Geometry.RectangleBody(tile.minX, tile.minY, tile.maxX, tile.maxY));
             }
+        });
+    };
+
+    generateMap = () => {
+        const dungeonId = 'development'; // TODO
+        const { width, height, layers } = generate({
+            mapWidth: 48,
+            mapHeight: 48,
+            mapGutterWidth: 1,
+            corridorWidth: 2,
+            iterations: 4,
+            containerMinimumRatio: 0.45,
+            containerSplitRetries: 30,
+            containerMinimumSize: 4,
+            rooms: DefaultRooms,
+            seed: dungeonId,
         });
     };
 
