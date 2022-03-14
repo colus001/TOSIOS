@@ -12,7 +12,7 @@ if (!BUILD_MODE || !['production', 'development'].includes(BUILD_MODE)) {
  * A builder function for the client package.
  */
 export async function buildClient() {
-    console.log('[Build] Building client...');
+    console.log('[Client] Building...');
 
     await build({
         entryPoints: ['packages/client/src/index.tsx'],
@@ -37,19 +37,19 @@ export async function buildClient() {
                 ? false
                 : {
                       onRebuild: (error, result) => {
-                          console.log(`[Client] Build finished at ${new Date().toISOString()}`);
+                          console.log(`[Client] Rebuilt finished at ${new Date().toISOString()} ✔️`);
                       },
                   },
     });
 
-    console.log('[Build] Client built...');
+    console.log('[Client] Done ✅');
 }
 
 /**
  * A builder function for the server package.
  */
 export async function buildServer() {
-    console.log('[Build] Building server...');
+    console.log('[Server] Building...');
 
     await build({
         entryPoints: ['packages/server/src/index.ts'],
@@ -68,24 +68,24 @@ export async function buildServer() {
                 ? false
                 : {
                       onRebuild: (error, result) => {
-                          console.log(`[Server] Build finished at ${new Date().toISOString()}`);
+                          console.log(`[Server] Rebuilt finished at ${new Date().toISOString()} ✔️`);
                       },
                   },
     });
 
-    console.log('[Build] Server built...');
+    console.log('[Server] Done ✅');
 }
 
 /**
  * A builder function for all packages.
  */
 async function buildAll() {
-    console.log(`[Build] Building project in "${BUILD_MODE}" mode...`);
+    console.log(`[All] Building project in "${BUILD_MODE}" mode...`);
 
     await buildClient();
     await buildServer();
 
-    console.log('[Build] Building completed.');
+    console.log('[All] Done ✅');
 }
 
 // This method is executed when we run the script from the terminal with ts-node
